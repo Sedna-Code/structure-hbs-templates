@@ -1,3 +1,3 @@
 # Template pattern handlebars
 
-Olá mundo
+Olá mundo.
