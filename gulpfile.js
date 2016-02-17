@@ -191,22 +191,23 @@ gulp.task('scripts:minify', ['scripts:jshint'], function() {
 	.pipe(browserSync.reload({stream: true}));
 });
 
-//compressing images & handle SVG files
+// Comprimi as imagens e arquivos svg.
 gulp.task('images:minify', function() {
-	//
+
+	// Rota do diretório das imagens.
 	gulp.src(CONFIG.PATH.IMAGES.ROOT + '**/*')
 
-	//prevent pipe breaking caused by errors from gulp plugins
+	// Evita paralizar o watch e exibe erros.
 	.pipe(plumber())
 
-	//
+	// Inicia o imagemin e suas pré configurações.
 	.pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
 
-	//
+	// Salva o arquivo final no diretório específico.
 	.pipe(gulp.dest(CONFIG.PATH.IMAGES.ROOT));
 });
 
-//generate sprite file
+// Gera o arquivo Sprite.png
 gulp.task('images:sprite', function () {
 	var spriteData = gulp.src(CONFIG.PATH.IMAGES.SPRITE + '*.png')
 		.pipe(spritesmith({
@@ -222,50 +223,64 @@ gulp.task('images:sprite', function () {
 			}
 		}));
 
+	// Salva a imagem final no diretório específico.
 	spriteData.img.pipe(gulp.dest(CONFIG.PATH.IMAGES.ROOT));
+
+	// Salva o arquivo final no diretório específico.
 	spriteData.css.pipe(gulp.dest(CONFIG.PATH.STYLES.SCSS));
 
 	return spriteData;
 });
 
-//convert templates .hbs to javascript file
+// Converte os templates.hbs para arquivos JS.
 gulp.task('templates', function() {
 
-	//
+	// Rota do diretório dos templates .hbs.
 	gulp.src(CONFIG.PATH.TEMPLATES + '**/*.hbs')
-		.pipe(handlebars())
-		.pipe(wrap('Handlebars.template(<%= contents %>)'))
-		.pipe(declare({
-		namespace: 'App.templates',
-		noRedeclare: true, // Avoid duplicate declarations
+
+	// Transforma o hbs em js
+	.pipe(handlebars())
+
+	// Copila e subtitui as variáveis dos objetos
+	.pipe(wrap('Handlebars.template(<%= contents %>)'))
+
+	.pipe(declare({
+		namespace: 'App.Templates', // Variável onde fica armazenado o template
+		noRedeclare: true, // Evita declarações duplicadas.
 	}))
 
-	//
+	// Inclui todos os templates no Templates.js.
 	.pipe(concat('Templates.js'))
 
-	//
+	// Salva o arquivo final no diretório específico.
 	.pipe(gulp.dest(CONFIG.PATH.SCRIPTS.ROOT))
 
-	//
+	// Notifica o browserSync a dar refresh depois de gerar os arquivos concatenados e minificados.
 	.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('watch', ['browserSync'], function () {
-	function reportChange(event){
-		console.log('\nEvent type: ' + event.type); // added, changed, or deleted
-		console.log('Event path: ' + event.path + '\n'); // The path of the modified file
-	}
 
-	//styles watch
+/**
+ * Responsável por vigiar e executar todas as tarefas de:
+ * copilação, minificação, padronização e alertas dos módulos
+ * (Style, Images, Scripts, Templates)
+ */
+gulp.task('watch', ['browserSync'], function () {
+	function reportChange(event) {
+		console.log('\nEvent type: ' + event.type); // Adicinar, Alterar ou Deletar.
+		console.log('Event path: ' + event.path + '\n'); // O caminho onde foi modificado o arquivo.
+	};
+
+	//Styles watch
 	gulp.watch(['!' + CONFIG.PATH.STYLES.SCSS + 'Sprite.scss', CONFIG.PATH.STYLES.SCSS + '**/*.scss'], ['styles']).on('change', reportChange);
 
-	//images watch
+	//Images watch
 	gulp.watch([CONFIG.PATH.IMAGES.SPRITE + '*.png'], ['images:sprite']).on('change', reportChange);
 
-	//scripts watch
+	//Scripts watch
 	gulp.watch(CONFIG.PATH.SCRIPTS.SRC + '**/*', ['scripts:minify']).on('change', reportChange);
 
-	//templates hbs watch
+	//Templates.hbs watch
 	gulp.watch(CONFIG.PATH.TEMPLATES + '**/*.hbs', ['templates']).on('change', reportChange);
 });
 
