@@ -10,25 +10,25 @@
  */
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
-var gulp = require('gulp'), //
-	gutil = require('gulp-util'), //
-	sass = require('gulp-sass'), //
-	autoprefixer = require('gulp-autoprefixer'), //
-	uglify = require('gulp-uglify'), //
-	jshint = require('gulp-jshint'), //
-	cssminify = require('gulp-cssnano'), //
-	imagemin = require('gulp-imagemin'), //
-	spritesmith = require('gulp.spritesmith'), //
-	sourcemaps = require('gulp-sourcemaps'), //
-	plumber = require('gulp-plumber'), //
-	concat = require('gulp-concat'), //
-	handlebars = require('gulp-handlebars'), //
-	wrap = require('gulp-wrap'), //
-	declare = require('gulp-declare'), //
-	browserSync = require('browser-sync'), //
-	argv = require('yargs').argv, //
-	hostPort = argv.port || 3000, //
-	hostLocal = 'http://localhost:' + hostPort; //
+var gulp = require('gulp'),
+	gutil = require('gulp-util'),
+	sass = require('gulp-sass'),
+	autoprefixer = require('gulp-autoprefixer'),
+	uglify = require('gulp-uglify'),
+	jshint = require('gulp-jshint'),
+	cssminify = require('gulp-cssnano'),
+	imagemin = require('gulp-imagemin'),
+	spritesmith = require('gulp.spritesmith'),
+	sourcemaps = require('gulp-sourcemaps'),
+	plumber = require('gulp-plumber'),
+	concat = require('gulp-concat'),
+	handlebars = require('gulp-handlebars'),
+	wrap = require('gulp-wrap'),
+	declare = require('gulp-declare'),
+	browserSync = require('browser-sync'),
+	argv = require('yargs').argv,
+	hostPort = argv.port || 3000,
+	hostLocal = 'http://localhost:' + hostPort;
 
 
 /**
