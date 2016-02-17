@@ -1,0 +1,16 @@
+﻿// ==========================================================================
+// Breakpoint mixins used in media-queries
+// ==========================================================================
+
+$phone-portrait:   320px;
+$phone-landscape:  480px;
+
+$phablet-portrait: 640px;
+
+$tablet-portrait:  768px;
+$tablet-landscape: 1024px;
+
+
+// How to use:
+// @media screen and (max-width: $phone-portrait) { ... }
+// ==========================================================================

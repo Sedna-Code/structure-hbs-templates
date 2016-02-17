@@ -1,0 +1,15 @@
+﻿.container {
+    position: relative;
+    max-width: 1260px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+.container-inside {
+    max-width: 940px;
+    padding: 0 10px;
+    margin: 0 auto;
+    position: relative;
+    clear: both;
+    overflow: hidden;
+}
