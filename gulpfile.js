@@ -33,20 +33,24 @@ var gulp = require('gulp'),
 
 /**
  * Configuração dos diretórios para facilitar os diretórios.
+ * Source: Arquivos de desenvolvimento | Build: Arquivos finais.
  */
 var CONFIG = {
 	PATH : {
 		SCRIPTS : {
-			ROOT: 'App/Scripts/',
-			SRC: 'App/Scripts/Source/'
+			ROOT: 'App/Source/Scripts/',
+			SRC: 'App/Source/Scripts/Source/',
+			DIST: 'App/Build/Scripts/'
 		},
 		STYLES: {
-			ROOT: 'App/Styles/',
-			SCSS: 'App/Styles/Scss/'
+			ROOT: 'App/Source/Styles/',
+			SCSS: 'App/Source/Styles/Scss/',
+			DIST: 'App/Build/Styles/'
 		},
 		IMAGES: {
-			ROOT: 'App/Images/',
-			SPRITE: 'App/Images/Sprite/'
+			ROOT: 'App/Source/Images/',
+			SPRITE: 'App/Source/Images/Sprite/',
+			DIST: 'App/Build/Images/'
 		},
 		TEMPLATES: 'App/Views/'
 	}
@@ -84,7 +88,7 @@ gulp.task('styles', ['images:sprite'], function() {
 		CONFIG.PATH.STYLES.SCSS + 'Plugins/*.scss',
 		CONFIG.PATH.STYLES.SCSS + 'Themes/*.scss',
 		CONFIG.PATH.STYLES.SCSS + 'Utilities/*.scss',
-		CONFIG.PATH.STYLES.SCSS + 'Comum.scss'
+		CONFIG.PATH.STYLES.SCSS + 'Commom.scss'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -122,7 +126,7 @@ gulp.task('styles', ['images:sprite'], function() {
 	.pipe(sourcemaps.write())
 
 	// Salva o arquivo final no diretório específico.
-	.pipe(gulp.dest(CONFIG.PATH.STYLES.ROOT))
+	.pipe(gulp.dest(CONFIG.PATH.STYLES.DEST))
 
 	// Notifica o browserSync a dar refresh depois de gerar os arquivos concatenados e minificados.
 	.pipe(browserSync.reload({stream: true}));
@@ -140,7 +144,7 @@ gulp.task('scripts:jshint', function() {
         CONFIG.PATH.SCRIPTS.SRC + 'Modules/*.js',
         CONFIG.PATH.SCRIPTS.SRC + 'Themes/*.js',
         CONFIG.PATH.SCRIPTS.SRC + 'Utilities/*.js',
-        CONFIG.PATH.SCRIPTS.SRC + 'Common.js'
+        CONFIG.PATH.SCRIPTS.SRC + 'Commom.js'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -169,7 +173,7 @@ gulp.task('scripts:minify', ['scripts:jshint'], function() {
     	CONFIG.PATH.SCRIPTS.SRC + 'Modules/**/*.js',
     	CONFIG.PATH.SCRIPTS.SRC + 'Themes/**/*.js',
     	CONFIG.PATH.SCRIPTS.SRC + 'Utilities/**/*.js',
-    	CONFIG.PATH.SCRIPTS.SRC + 'Common.js'
+    	CONFIG.PATH.SCRIPTS.SRC + 'Commom.js'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -185,7 +189,7 @@ gulp.task('scripts:minify', ['scripts:jshint'], function() {
 	.on('error', gutil.log)
 
 	// Salva o arquivo final no diretório específico.
-	.pipe(gulp.dest(CONFIG.PATH.SCRIPTS.ROOT))
+	.pipe(gulp.dest(CONFIG.PATH.SCRIPTS.DEST))
 
 	// Notifica o browserSync a dar refresh depois de gerar os arquivos concatenados e minificados.
 	.pipe(browserSync.reload({stream: true}));
@@ -204,7 +208,7 @@ gulp.task('images:minify', function() {
 	.pipe(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true }))
 
 	// Salva o arquivo final no diretório específico.
-	.pipe(gulp.dest(CONFIG.PATH.IMAGES.ROOT));
+	.pipe(gulp.dest(CONFIG.PATH.IMAGES.DEST));
 });
 
 // Gera o arquivo Sprite.png
@@ -224,7 +228,7 @@ gulp.task('images:sprite', function () {
 		}));
 
 	// Salva a imagem final no diretório específico.
-	spriteData.img.pipe(gulp.dest(CONFIG.PATH.IMAGES.ROOT));
+	spriteData.img.pipe(gulp.dest(CONFIG.PATH.IMAGES.DEST));
 
 	// Salva o arquivo final no diretório específico.
 	spriteData.css.pipe(gulp.dest(CONFIG.PATH.STYLES.SCSS));
@@ -253,7 +257,7 @@ gulp.task('templates', function() {
 	.pipe(concat('Templates.js'))
 
 	// Salva o arquivo final no diretório específico.
-	.pipe(gulp.dest(CONFIG.PATH.SCRIPTS.ROOT))
+	.pipe(gulp.dest(CONFIG.PATH.SCRIPTS.DEST))
 
 	// Notifica o browserSync a dar refresh depois de gerar os arquivos concatenados e minificados.
 	.pipe(browserSync.reload({stream: true}));
