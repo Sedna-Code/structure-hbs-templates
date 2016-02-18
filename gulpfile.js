@@ -32,7 +32,7 @@ var gulp = require('gulp'),
 
 
 /**
- * Configuração dos diretórios para facilitar os diretórios.
+ * Configuração dos diretórios para facilitar os diretórios,
  * Source: Arquivos de desenvolvimento | Build: Arquivos finais.
  */
 var CONFIG = {
@@ -49,7 +49,7 @@ var CONFIG = {
 		},
 		IMAGES: {
 			ROOT: 'App/Source/Images/',
-			SPRITE: 'App/Build/Images/Sprite/',
+			SPRITE: 'App/Source/Images/Sprite/',
 			DEST: 'App/Build/Images/'
 		},
 		TEMPLATES: 'App/Views/'
