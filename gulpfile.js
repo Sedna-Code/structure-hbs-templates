@@ -134,13 +134,13 @@ gulp.task('scripts:jshint', function() {
 	// Ordena os arquivos por prioridade.
 	return gulp.src([
 		CONFIG.PATH.SCRIPTS.SRC + 'Config.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Base/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Layout/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Modules/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Themes/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Utilities/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Library/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Comum.js'
+        CONFIG.PATH.SCRIPTS.SRC + 'Library/*.js',
+        CONFIG.PATH.SCRIPTS.SRC + 'Base/*.js',
+        CONFIG.PATH.SCRIPTS.SRC + 'Layout/*.js',
+        CONFIG.PATH.SCRIPTS.SRC + 'Modules/*.js',
+        CONFIG.PATH.SCRIPTS.SRC + 'Themes/*.js',
+        CONFIG.PATH.SCRIPTS.SRC + 'Utilities/*.js',
+        CONFIG.PATH.SCRIPTS.SRC + 'Common.js'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -162,14 +162,14 @@ gulp.task('scripts:minify', ['scripts:jshint'], function() {
 	// Ordena os arquivos por prioridade.
 	return gulp.src([
 		CONFIG.PATH.SCRIPTS.SRC + 'Config.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Plugins/**/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Base/**/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Layout/**/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Modules/**/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Themes/**/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Utilities/**/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Library/**/*.js',
-		CONFIG.PATH.SCRIPTS.SRC + 'Comum.js'
+        CONFIG.PATH.SCRIPTS.SRC + 'Plugins/**/*.js',
+        CONFIG.PATH.SCRIPTS.SRC + 'Library/**/*.js',
+    	CONFIG.PATH.SCRIPTS.SRC + 'Base/**/*.js',
+    	CONFIG.PATH.SCRIPTS.SRC + 'Layout/**/*.js',
+    	CONFIG.PATH.SCRIPTS.SRC + 'Modules/**/*.js',
+    	CONFIG.PATH.SCRIPTS.SRC + 'Themes/**/*.js',
+    	CONFIG.PATH.SCRIPTS.SRC + 'Utilities/**/*.js',
+    	CONFIG.PATH.SCRIPTS.SRC + 'Common.js'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -272,17 +272,17 @@ gulp.task('watch', ['browserSync'], function () {
 	};
 
 	//Styles watch
-	gulp.watch(['!' + CONFIG.PATH.STYLES.SCSS + 'Sprite.scss', CONFIG.PATH.STYLES.SCSS + '**/*.scss'], ['styles']).on('change', reportChange);
+	gulp.watch([CONFIG.PATH.STYLES.SCSS + '**/*.scss', '!' + CONFIG.PATH.STYLES.SCSS + 'Sprite.scss'], ['styles']).on('change', reportChange);
 
 	//Images watch
-	gulp.watch([CONFIG.PATH.IMAGES.SPRITE + '*.png'], ['images:sprite']).on('change', reportChange);
+	gulp.watch([CONFIG.PATH.IMAGES.SPRITE + '*.png'], ['styles']);
 
 	//Scripts watch
-	gulp.watch(CONFIG.PATH.SCRIPTS.SRC + '**/*', ['scripts:minify']).on('change', reportChange);
+	gulp.watch(CONFIG.PATH.SCRIPTS.SRC + '**/*', ['scripts:minify']);
 
 	//Templates.hbs watch
-	gulp.watch(CONFIG.PATH.TEMPLATES + '**/*.hbs', ['templates']).on('change', reportChange);
+	gulp.watch(CONFIG.PATH.TEMPLATES + '**/*.hbs', ['templates']);
 });
 
 // Task utilizada para chamar o watch
-gulp.task('default', ['templates', 'styles', 'scripts:minify' ]);
+gulp.task('default', ['templates', 'styles', 'scripts:minify', 'images:minify']);
