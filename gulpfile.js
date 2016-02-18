@@ -39,18 +39,18 @@ var CONFIG = {
 	PATH : {
 		SCRIPTS : {
 			ROOT: 'App/Source/Scripts/',
-			SRC: 'App/Source/Scripts/Source/',
-			DIST: 'App/Build/Scripts/'
+			SRC: 'App/Source/Scripts/',
+			DEST: 'App/Build/Scripts/'
 		},
 		STYLES: {
 			ROOT: 'App/Source/Styles/',
 			SCSS: 'App/Source/Styles/Scss/',
-			DIST: 'App/Build/Styles/'
+			DEST: 'App/Build/Styles/'
 		},
 		IMAGES: {
 			ROOT: 'App/Source/Images/',
-			SPRITE: 'App/Source/Images/Sprite/',
-			DIST: 'App/Build/Images/'
+			SPRITE: 'App/Build/Images/Sprite/',
+			DEST: 'App/Build/Images/'
 		},
 		TEMPLATES: 'App/Views/'
 	}
