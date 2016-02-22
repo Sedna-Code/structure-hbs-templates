@@ -2,13 +2,13 @@
 <head>
 	<title>Teste</title>
 
-	<link rel="stylesheet" href="App/Styles/App.css">
+	<link rel="stylesheet" href="App/Build/Styles/App.css">
 </head>
 <body>
-	<h1>Ha ha ha!</h1>
-	
-	<script type="text/javascript" src="App/Js/App.js"></script>
-	<script type="text/javascript" src="App/Js/Templates.js"></script>
+	<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit sed assumenda, architecto quis eligendi pariatur officiis labore, cum iste adipisci sint consequuntur dicta impedit error. Veritatis molestiae, officia consequuntur temporibus.</h1>
+
+	<script type="text/javascript" src="App/Build/Scripts/App.js"></script>
+	<script type="text/javascript" src="App/Build/Scripts/Templates.js"></script>
 
 	<script type="text/javascript">
 
@@ -16,7 +16,7 @@
 		//var template = Handlebars.compile(MyApp.templates.brasil);
 
 		var context = {title: "Teste", body: "Isso é um teste!"};
-		var html    = App.templates.brasil(context);
+		var html    = App.Templates.brasil(context);
 
 		$('body').append(html);
 
@@ -26,7 +26,7 @@
 			{item: "Ingrid"}
 		]};
 
-		var html2 = App.templates.index(context2);
+		var html2 = App.Templates.index(context2);
 
 		$('body').append(html2);
 	</script>
