@@ -25,7 +25,7 @@ var gulp = require('gulp'),
 	handlebars = require('gulp-handlebars'),
 	wrap = require('gulp-wrap'),
 	declare = require('gulp-declare'),
-	browserSync = require('browser-sync'),
+	//browserSync = require('browser-sync'),
 	argv = require('yargs').argv,
 	hostPort = argv.port || 3000,
 	hostLocal = 'http://localhost:' + hostPort;
@@ -52,7 +52,7 @@ var CONFIG = {
 			SPRITE: 'App/Source/Images/Sprite/',
 			DEST: 'App/Build/Images/'
 		},
-		TEMPLATES: 'App/Views/'
+		TEMPLATES: 'App/Source/Views/'
 	}
 };
 
@@ -62,7 +62,7 @@ var CONFIG = {
  */
 
 // Responsável pela sincronização de arquivos com o navegador.
-gulp.task('browserSync', function() {
+/*gulp.task('browserSync', function() {
 	browserSync({
 		server: {
 			baseDir: ''
@@ -73,7 +73,7 @@ gulp.task('browserSync', function() {
 		notify: false,
 		port: hostPort
 	});
-});
+});*/
 
 // Responsável pela compilação dos arquivos SCSS/CSS.
 gulp.task('styles', ['images:sprite'], function() {
@@ -88,7 +88,7 @@ gulp.task('styles', ['images:sprite'], function() {
 		CONFIG.PATH.STYLES.SCSS + 'Plugins/*.scss',
 		CONFIG.PATH.STYLES.SCSS + 'Themes/*.scss',
 		CONFIG.PATH.STYLES.SCSS + 'Utilities/*.scss',
-		CONFIG.PATH.STYLES.SCSS + 'Commom.scss'
+		CONFIG.PATH.STYLES.SCSS + 'Common.scss'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -129,7 +129,7 @@ gulp.task('styles', ['images:sprite'], function() {
 	.pipe(gulp.dest(CONFIG.PATH.STYLES.DEST))
 
 	// Notifica o browserSync a dar refresh depois de gerar os arquivos concatenados e minificados.
-	.pipe(browserSync.reload({stream: true}));
+	//.pipe(browserSync.reload({stream: true}));
 });
 
 // Responsável pela validação e padronização dos arquivos JS.
@@ -144,7 +144,7 @@ gulp.task('scripts:jshint', function() {
         CONFIG.PATH.SCRIPTS.SRC + 'Modules/*.js',
         CONFIG.PATH.SCRIPTS.SRC + 'Themes/*.js',
         CONFIG.PATH.SCRIPTS.SRC + 'Utilities/*.js',
-        CONFIG.PATH.SCRIPTS.SRC + 'Commom.js'
+        CONFIG.PATH.SCRIPTS.SRC + 'Common.js'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -173,7 +173,7 @@ gulp.task('scripts:minify', ['scripts:jshint'], function() {
     	CONFIG.PATH.SCRIPTS.SRC + 'Modules/**/*.js',
     	CONFIG.PATH.SCRIPTS.SRC + 'Themes/**/*.js',
     	CONFIG.PATH.SCRIPTS.SRC + 'Utilities/**/*.js',
-    	CONFIG.PATH.SCRIPTS.SRC + 'Commom.js'
+    	CONFIG.PATH.SCRIPTS.SRC + 'Common.js'
 	])
 
 	// Evita paralizar o watch e exibe erros.
@@ -192,7 +192,7 @@ gulp.task('scripts:minify', ['scripts:jshint'], function() {
 	.pipe(gulp.dest(CONFIG.PATH.SCRIPTS.DEST))
 
 	// Notifica o browserSync a dar refresh depois de gerar os arquivos concatenados e minificados.
-	.pipe(browserSync.reload({stream: true}));
+	// .pipe(browserSync.reload({stream: true}));
 });
 
 // Comprimi as imagens e arquivos svg.
@@ -260,7 +260,7 @@ gulp.task('templates', function() {
 	.pipe(gulp.dest(CONFIG.PATH.SCRIPTS.DEST))
 
 	// Notifica o browserSync a dar refresh depois de gerar os arquivos concatenados e minificados.
-	.pipe(browserSync.reload({stream: true}));
+	//.pipe(browserSync.reload({stream: true}));
 });
 
 
@@ -269,7 +269,8 @@ gulp.task('templates', function() {
  * copilação, minificação, padronização e alertas dos módulos
  * (Style, Images, Scripts, Templates)
  */
-gulp.task('watch', ['browserSync'], function () {
+//gulp.task('watch', ['browserSync'], function () {
+gulp.task('watch', function () {
 	function reportChange(event) {
 		console.log('\nEvent type: ' + event.type); // Adicinar, Alterar ou Deletar.
 		console.log('Event path: ' + event.path + '\n'); // O caminho onde foi modificado o arquivo.
