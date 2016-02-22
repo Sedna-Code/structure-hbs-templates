@@ -1,3 +1,3 @@
 # Template pattern handlebars
 
-Olá mundo!
+Estrutura de pasta para projetos com Handlebars.
